@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="chat-container">
+        <div class="chatbox">
+            <div class="chatbox-header">
+                <div class="chatbox-logo"><img src="./icons/logo.svg" alt="Logo"></div>
+                <div class="chatbox-header-text">
+                    <h2>Hi this is Huma!</h2>
+                    <p>How can I help you?</p>
+                </div>
+                <button class="chatbox-close-btn"><img src="./icons/cross.svg" alt="close"></button>
+            </div>
+            <div class="chatbox-body">
+                <div class="chatbox-body-inner">
+                    <div class="chatbox-message from">
+                        <div>
+                            <div class="chatbox-logo"><img src="./icons/logo.svg" alt="Logo"></div>
+                            <div class="message">
+                                Hi there
+                                <!-- <span class="dots-cont"> <span class="dot dot-1"></span> <span class="dot dot-2"></span> <span class="dot dot-3"></span> </span>   -->
+                            </div>
+                        </div>
+                        <div class="chatbox-time"></div>
+                    </div>
+                    <div class="chatbox-message to">
+                        <div class="message">Hi</div>
+                        <div class="chatbox-time"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="chatbox-input-container">
+                <input type="text" placeholder="Type something..." class="chatbox-input">
+                <button class="chatbox-send-btn" disabled><img src="./icons/send.svg" alt="send"></button>
+            </div>
+            <a class="chatbox-footer" href="https://humalogy.ai" target="_blank">
+                Powered by <span><img src="./icons/logo.svg" alt="Logo" srcset=""></span> Humalogy.ai
+            </a>
+        </div>
+        <button class="open-chat-btn"><img src="./icons/message.svg" alt="Open chat"></button>
+    </div>
+
+    <script src="./script.js">
+    </script>
+
+</body>
+
+</html>
