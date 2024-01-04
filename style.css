@@ -364,6 +364,7 @@ body {
         overflow: hidden !important;
     }
     .chatbox{
+        border-radius: 0;
         max-height: none;
         min-width: 0;
         width: 100vw;
