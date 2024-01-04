@@ -218,7 +218,7 @@ body {
 /* messages */
 .chatbox-message .message{
     position: relative;
-    max-width: 150px;
+    max-width: 220px;
     min-width: 50px;
     width: max-content;
     border-radius: 12px;
@@ -379,8 +379,8 @@ body {
         border-top: 0px;
         border-left: 0px;
         border-right: 0px;
-        width: calc(100vw);
-        height: calc(100vh);
+        width: 100svw;
+        height: 100svh;
     }
 }
 
