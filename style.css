@@ -381,8 +381,8 @@ body {
         border-top: 0px;
         border-left: 0px;
         border-right: 0px;
-        width: 100svw;
-        height: 100svh;
+        width: 100dvw;
+        height: 100dvh;
     }
 }
 
