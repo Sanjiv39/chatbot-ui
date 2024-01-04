@@ -120,6 +120,9 @@ const stopSlide = () => {
     els.forEach((el) => {
         el.addEventListener('animationend', () => {
             el.classList.remove('chatbox-slide')
+            setTimeout(()=>{
+                el.nextSibling.style.opacity = 1
+            }, 200)
         })
     })
 }
@@ -157,11 +160,15 @@ chatboxSendBtn.addEventListener('click', () => {
     if (message !== '' && enableSendMessage) {
         let date = new Date()
         let time = getTime(date)
+        let Box = document.createElement('div')
         let messageBox = document.createElement('div')
-        messageBox.classList.add('chatbox-message', 'to')
-        messageBox.innerHTML = `<div class="message chatbox-slide">${message}</div>
-        <div class="chatbox-time">${time}</div>`
-        chatboxBodyInner.appendChild(messageBox)
+        messageBox.innerText = message
+        Box.appendChild(messageBox)
+        messageBox.classList.add('message', 'chatbox-slide')
+        Box.classList.add('chatbox-message', 'to')
+        Box.innerHTML += `<div class="chatbox-time">${time}</div>`
+        chatboxBodyInner.appendChild(Box)
+        Box.children[Box.children.length - 1].style.opacity = 0
         stopSlide()
         getQuote()
         chatboxInput.value = ''
@@ -169,9 +176,9 @@ chatboxSendBtn.addEventListener('click', () => {
         chatboxSendBtn.disabled = true
         enableSendMessage = false
         setTimeout(() => {
-            let messageBox = document.createElement('div')
-            messageBox.classList.add('chatbox-message', 'from')
-            handleResponse(messageBox)
+            let Box = document.createElement('div')
+            Box.classList.add('chatbox-message', 'from')
+            handleResponse(Box)
         }, 500)
     }
     message = ''
