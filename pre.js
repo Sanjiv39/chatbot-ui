@@ -1,3 +1,12 @@
+let chatbox = document.querySelector('.chatbox')
+let chatboxBtn = document.querySelector('.open-chat-btn')
+let chatboxCloseBtn = document.querySelector('.chatbox-close-btn')
+let chatboxBody = document.querySelector('.chatbox-body')
+let chatboxBodyInner = document.querySelector('.chatbox-body-inner')
+let chatboxInput = document.querySelector('.chatbox-input')
+let chatboxSendBtn = document.querySelector('.chatbox-send-btn')
+let chatboxTime = document.querySelectorAll('.chatbox-time')
+
 const getTime = (date) => {
     let mer = Number.parseInt((date.getHours()) / 12) === 0 ? 'AM' : 'PM'
     let hrs = Number.parseInt((date.getHours()) % 12) === 0 && Number.parseInt((date.getHours()) / 12) === 1 ? 12 : Number.parseInt((date.getHours()) % 12)

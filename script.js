@@ -1,11 +1,4 @@
-let chatbox = document.querySelector('.chatbox')
-let chatboxBtn = document.querySelector('.open-chat-btn')
-let chatboxCloseBtn = document.querySelector('.chatbox-close-btn')
-let chatboxBody = document.querySelector('.chatbox-body')
-let chatboxBodyInner = document.querySelector('.chatbox-body-inner')
-let chatboxInput = document.querySelector('.chatbox-input')
-let chatboxSendBtn = document.querySelector('.chatbox-send-btn')
-let chatboxTime = document.querySelectorAll('.chatbox-time')
+
 let botMessage = ''
 let message = ''
 let enableSendMessage = true
