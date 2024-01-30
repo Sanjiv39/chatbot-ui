@@ -42,15 +42,6 @@ const getDate = (date) => {
     }
     return day
 }
-const getTime = (date) => {
-    let mer = Number.parseInt((date.getHours()) / 12) === 0 ? 'AM' : 'PM'
-    let hrs = Number.parseInt((date.getHours()) % 12) === 0 && Number.parseInt((date.getHours()) / 12) === 1 ? 12 : Number.parseInt((date.getHours()) % 12)
-    hrs = hrs <= 9 ? `0${hrs}` : `${hrs}`
-    let min = date.getMinutes()
-    min = min <= 9 ? `0${min}` : `${min}`
-    let str = `${hrs}:${min} ${mer}`
-    return str
-}
 // console.log(getTime(date))
 
 // Give time stamp to initial messages
@@ -137,59 +128,59 @@ const stopFade = () => {
     })
 }
 
-// Events
-chatboxBtn.addEventListener('click', () => {
-    chatbox.classList.toggle('active')
-    document.body.classList.toggle('chatbox-body-overflow')
-})
-chatboxCloseBtn.addEventListener('click', () => {
-    chatbox.classList.toggle('active')
-    document.body.classList.remove('chatbox-body-overflow')
-})
-chatboxInput.addEventListener('input', (event) => {
-    message = event.target.value.trim()
-    message.length > 0 && enableSendMessage ? chatboxSendBtn.disabled = false : chatboxSendBtn.disabled = true
-})
-chatboxInput.addEventListener('click', (event) => {
-    message = event.target.value.trim()
-    chatboxBody.scrollTop = chatboxBody.scrollHeight
-})
+// // Events
+// chatboxBtn.addEventListener('click', () => {
+//     chatbox.classList.toggle('active')
+//     document.body.classList.toggle('chatbox-body-overflow')
+// })
+// chatboxCloseBtn.addEventListener('click', () => {
+//     chatbox.classList.toggle('active')
+//     document.body.classList.remove('chatbox-body-overflow')
+// })
+// chatboxInput.addEventListener('input', (event) => {
+//     message = event.target.value.trim()
+//     message.length > 0 && enableSendMessage ? chatboxSendBtn.disabled = false : chatboxSendBtn.disabled = true
+// })
+// chatboxInput.addEventListener('click', (event) => {
+//     message = event.target.value.trim()
+//     chatboxBody.scrollTop = chatboxBody.scrollHeight
+// })
 
-// Send message
-chatboxSendBtn.addEventListener('click', () => {
-    if (message !== '' && enableSendMessage) {
-        let date = new Date()
-        let time = getTime(date)
-        let Box = document.createElement('div')
-        let messageBox = document.createElement('div')
-        messageBox.innerText = message
-        Box.appendChild(messageBox)
-        messageBox.classList.add('message', 'chatbox-slide')
-        Box.classList.add('chatbox-message', 'to')
-        Box.innerHTML += `<div class="chatbox-time">${time}</div>`
-        chatboxBodyInner.appendChild(Box)
-        Box.children[Box.children.length - 1].style.opacity = 0
-        stopSlide()
-        getQuote()
-        chatboxInput.value = ''
-        chatboxBody.scrollTop = chatboxBody.scrollHeight
-        chatboxSendBtn.disabled = true
-        enableSendMessage = false
-        setTimeout(() => {
-            let Box = document.createElement('div')
-            Box.classList.add('chatbox-message', 'from')
-            handleResponse(Box)
-        }, 500)
-    }
-    message = ''
-})
+// // Send message
+// chatboxSendBtn.addEventListener('click', () => {
+//     if (message !== '' && enableSendMessage) {
+//         let date = new Date()
+//         let time = getTime(date)
+//         let Box = document.createElement('div')
+//         let messageBox = document.createElement('div')
+//         messageBox.innerText = message
+//         Box.appendChild(messageBox)
+//         messageBox.classList.add('message', 'chatbox-slide')
+//         Box.classList.add('chatbox-message', 'to')
+//         Box.innerHTML += `<div class="chatbox-time">${time}</div>`
+//         chatboxBodyInner.appendChild(Box)
+//         Box.children[Box.children.length - 1].style.opacity = 0
+//         stopSlide()
+//         getQuote()
+//         chatboxInput.value = ''
+//         chatboxBody.scrollTop = chatboxBody.scrollHeight
+//         chatboxSendBtn.disabled = true
+//         enableSendMessage = false
+//         setTimeout(() => {
+//             let Box = document.createElement('div')
+//             Box.classList.add('chatbox-message', 'from')
+//             handleResponse(Box)
+//         }, 500)
+//     }
+//     message = ''
+// })
 
-// Enter key 
-chatbox.addEventListener('keypress', (event) => {
-    // console.log(event.key)
-    if (event.key === 'Enter' && chatbox.classList.contains('active') && enableSendMessage) {
-        chatboxSendBtn.click()
-    }
-})
+// // Enter key 
+// chatbox.addEventListener('keypress', (event) => {
+//     // console.log(event.key)
+//     if (event.key === 'Enter' && chatbox.classList.contains('active') && enableSendMessage) {
+//         chatboxSendBtn.click()
+//     }
+// })
 
 // Get Message
