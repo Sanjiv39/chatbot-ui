@@ -8,7 +8,7 @@ const getTime = (date) => {
     return str
 }
 
-const preRunner = async() => {
+const preRunner = () => {
     let container = document.querySelector('.chat-container')
     // Create elements
     const chatbox = document.createElement('div');
@@ -56,13 +56,13 @@ const preRunner = async() => {
     </div>
     <div class="chatbox-time"></div>`;
 
-    const chatTo = document.createElement('div');
-    chatTo.classList.add('chatbox-message', 'to');
-    chatTo.innerHTML = `<div class="message">Hi</div>
-    <div class="chatbox-time"></div>`;
+    // const chatTo = document.createElement('div');
+    // chatTo.classList.add('chatbox-message', 'to');
+    // chatTo.innerHTML = `<div class="message">Hi</div>
+    // <div class="chatbox-time"></div>`;
 
     chatboxBodyInner.appendChild(chatFrom);
-    chatboxBodyInner.appendChild(chatTo);
+    // chatboxBodyInner.appendChild(chatTo);
     chatboxBody.appendChild(chatboxBodyInner);
 
     const inputContainer = document.createElement('div');
@@ -95,15 +95,15 @@ const preRunner = async() => {
     container.appendChild(openChatButton)
 }
 
-const update = async() => {
-    let chatbox = document.querySelector('.chatbox')
-    let chatboxBtn = document.querySelector('.open-chat-btn')
-    let chatboxCloseBtn = document.querySelector('.chatbox-close-btn')
-    let chatboxBody = document.querySelector('.chatbox-body')
-    let chatboxBodyInner = document.querySelector('.chatbox-body-inner')
-    let chatboxInput = document.querySelector('.chatbox-input')
-    let chatboxSendBtn = document.querySelector('.chatbox-send-btn')
-    let chatboxTime = document.querySelectorAll('.chatbox-time')
+const update = () => {
+    chatbox = document.querySelector('.chatbox')
+    chatboxBtn = document.querySelector('.open-chat-btn')
+    chatboxCloseBtn = document.querySelector('.chatbox-close-btn')
+    chatboxBody = document.querySelector('.chatbox-body')
+    chatboxBodyInner = document.querySelector('.chatbox-body-inner')
+    chatboxInput = document.querySelector('.chatbox-input')
+    chatboxSendBtn = document.querySelector('.chatbox-send-btn')
+    chatboxTime = document.querySelectorAll('.chatbox-time')
 
     // Events
     chatboxBtn.addEventListener('click', () => {
@@ -161,9 +161,9 @@ const update = async() => {
     })
 }
 
-const main = async() => {
-    await preRunner()
-    await update()
+const main = () => {
+    preRunner()
+    update()
 }
 
 main()
