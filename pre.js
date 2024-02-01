@@ -135,6 +135,7 @@ const update = () => {
     // Send message
     chatboxSendBtn.addEventListener('click', () => {
         if (message !== '' && enableSendMessage) {
+            clientMessage = message.trim().replace(/ +/g, " ");
             let date = new Date()
             let time = getTime(date)
             let Box = document.createElement('div')

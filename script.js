@@ -1,6 +1,6 @@
-
 let botMessage = ''
 let message = ''
+let clientMessage = ''
 let enableSendMessage = true
 let apiResolved = false
 let tempDots = '<span class="dots-cont"> <span class="dot dot-1"></span> <span class="dot dot-2"></span> <span class="dot dot-3"></span> </span> '
@@ -54,17 +54,29 @@ const resetStats = () => {
 
 // Random quote api
 const getQuote = () => {
-    fetch('https://type.fit/api/quotes').then((res) => {
+    fetch('https://devapi.humalogy.ai/huma-chat/ask-query/', {
+        method: 'POST',
+        headers: {
+            'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo0NiwiZW1haWwiOiJ0aG9yQGFzZ2FyZC5jb20ifQ.TblgIGz92nM1nCLTLpQUxYh9iFyteNU1sd53z3vn7G0',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "website_url": "https://excellobpo.com/",
+            "user_question": clientMessage
+        })
+    }).then((res) => {
         return res.json()
     }).then((data) => {
-        let index = Math.round(Math.random() * (data.length - 1))
+        console.log(data)
         // console.log(index)
         // console.log(data)
-        botMessage = data[index].text
+        botMessage = data.data.message
         apiResolved = true
+        clientMessage = ''
     }).catch((err) => {
         console.log('Some error in getting message')
         apiResolved = false
+        clientMessage = ''
     })
 }
 
@@ -104,7 +116,7 @@ const stopSlide = () => {
     els.forEach((el) => {
         el.addEventListener('animationend', () => {
             el.classList.remove('chatbox-slide')
-            setTimeout(()=>{
+            setTimeout(() => {
                 el.nextSibling.style.opacity = 1
             }, 200)
         })
@@ -168,7 +180,7 @@ const stopFade = () => {
 //     message = ''
 // })
 
-// // Enter key 
+// // Enter key
 // chatbox.addEventListener('keypress', (event) => {
 //     // console.log(event.key)
 //     if (event.key === 'Enter' && chatbox.classList.contains('active') && enableSendMessage) {
