@@ -70,7 +70,7 @@ const getQuote = () => {
         console.log(data)
         // console.log(index)
         // console.log(data)
-        botMessage = data.data.message
+        botMessage = data.data.message.replace('\n\nHumaChat:', '').trim()
         apiResolved = true
         clientMessage = ''
     }).catch((err) => {
