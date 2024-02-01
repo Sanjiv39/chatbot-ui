@@ -61,7 +61,7 @@ const preRunner = () => {
     chatFrom.innerHTML = `
     <div>
         <div class="chatbox-logo"><img src="./icons/logo.svg" alt="Logo"></div>
-        <div class="message">Hi there</div>
+        <div class="message">Please tell how can I help you !</div>
     </div>
     <div class="chatbox-time"></div>`;
 
