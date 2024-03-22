@@ -1,14 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
-body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    width: 100vw;
-    height: 500vh;
-    /* position: relative; */
-}
-
 .chat-container {
+    font-family: 'Poppins', sans-serif;
     overflow: visible;
     width: 0;
     height: 0;
@@ -148,10 +141,13 @@ body {
 .chatbox-logo{
     clip-path: circle();
 }
+.chatbox-logo img{
+    height: inherit;
+    width: inherit;
+}
 
 .chatbox-header .chatbox-logo{
     flex-shrink: 0;
-    padding: 5px;
     background: white;
     width: 40px;
     height: 40px;
@@ -244,7 +240,6 @@ body {
 .chatbox-message.from .chatbox-logo{
     width: 25px;
     height: 25px;
-    padding: 3px;
     background: #e2e2e2;
 }
 .chatbox-message.from .message{

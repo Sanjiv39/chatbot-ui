@@ -1,3 +1,10 @@
+
+// Data to be overwritten
+let chatbotName = 'Quill'
+let avatar = '3'
+
+// Static
+
 let chatbox = document.querySelector('.chatbox')
 let chatboxBtn = document.querySelector('.open-chat-btn')
 let chatboxCloseBtn = document.querySelector('.chatbox-close-btn')
@@ -29,14 +36,14 @@ const preRunner = () => {
     const chatboxLogo = document.createElement('div');
     chatboxLogo.classList.add('chatbox-logo');
     const logoImg = document.createElement('img');
-    logoImg.src = './avatars/avatar-1.webp';
+    logoImg.src = `./avatars/avatar-${avatar}.webp`;
     logoImg.alt = 'Logo';
     chatboxLogo.appendChild(logoImg);
 
     const headerText = document.createElement('div');
     headerText.classList.add('chatbox-header-text');
     headerText.innerHTML = `
-    <h2>Hi this is Huma!</h2>
+    <h2>Hi this is ${chatbotName}!</h2>
     <p>How can I help you?</p>`;
 
     const closeButton = document.createElement('button');
@@ -60,8 +67,8 @@ const preRunner = () => {
     chatFrom.classList.add('chatbox-message', 'from');
     chatFrom.innerHTML = `
     <div>
-        <div class="chatbox-logo"><img src="./icons/logo.svg" alt="Logo"></div>
-        <div class="message">Please tell how can I help you !</div>
+        <div class="chatbox-logo"><img src="./avatars/avatar-${avatar}.webp" alt="Logo"></div>
+        <div class="message">Hey this is ${chatbotName}! Please tell how can I help you !</div>
     </div>
     <div class="chatbox-time"></div>`;
 
@@ -99,7 +106,6 @@ const preRunner = () => {
     openChatImg.alt = 'Open chat';
     openChatButton.appendChild(openChatImg);
 
-    // Append to document body or a container
     container.appendChild(chatbox);
     container.appendChild(openChatButton)
 }
@@ -177,3 +183,137 @@ const main = () => {
 }
 
 main()
+
+// NEXT SCRIPT
+let botMessage = ''
+let message = ''
+let clientMessage = ''
+let enableSendMessage = true
+let apiResolved = false
+let tempDots = '<span class="dots-cont"> <span class="dot dot-1"></span> <span class="dot dot-2"></span> <span class="dot dot-3"></span> </span> '
+// let date = new Date("October 13, 2014 07:8:00")
+let date = new Date()
+
+const getDate = (date) => {
+    let day = ''
+    let dayno = date.getDay()
+    switch (dayno) {
+        case 0:
+            day = 'Sun'
+            break;
+        case 1:
+            day = 'Mon'
+            break;
+        case 2:
+            day = 'Tue'
+            break;
+        case 3:
+            day = 'Wed'
+            break;
+        case 4:
+            day = 'Thu'
+            break;
+        case 5:
+            day = 'Fri'
+            break;
+        case 6:
+            day = 'Sat'
+            break;
+    }
+    return day
+}
+// console.log(getTime(date))
+
+// Give time stamp to initial messages
+Array.from(chatboxTime).forEach((el) => {
+    let time = getTime(date)
+    el.innerHTML = time
+})
+
+// Intiate stats and flags 
+const resetStats = () => {
+    enableSendMessage = true
+    apiResolved = false
+    if (message.length > 0) {
+        chatboxSendBtn.disabled = false
+    }
+}
+
+// Random quote api
+const getQuote = () => {
+    fetch('https://devapi.humalogy.ai/huma-chat/ask-query/', {
+        method: 'POST',
+        headers: {
+            // 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo0NiwiZW1haWwiOiJ0aG9yQGFzZ2FyZC5jb20ifQ.TblgIGz92nM1nCLTLpQUxYh9iFyteNU1sd53z3vn7G0',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "website_url": "https://excellobpo.com/",
+            "user_question": clientMessage
+        })
+    }).then((res) => {
+        return res.json()
+    }).then((data) => {
+        // console.log(data)
+        botMessage = data.data.message.replace('\n\nHumaChat:', '').trim()
+        apiResolved = true
+        clientMessage = ''
+    }).catch((err) => {
+        // console.log('Some error in getting message')
+        apiResolved = false
+        clientMessage = ''
+    })
+}
+
+// Handle response
+const handleResponse = (el) => {
+    let i = 0
+    let box = document.createElement('div')
+    box.innerHTML = `<div class="chatbox-logo"><img src="./avatars/avatar-${avatar}.webp" alt="Logo"></div><div class="message">${tempDots}</div>`
+    el.appendChild(box)
+    chatboxBodyInner.appendChild(el)
+    chatboxBody.scrollTop = chatboxBody.scrollHeight
+    let loader = setInterval(() => {
+        // console.log(i)
+        if (i >= 2 && i <= 14 && apiResolved) {
+            let date = new Date()
+            let time = getTime(date)
+            box.innerHTML = `<div class="chatbox-logo"><img src="./avatars/avatar-${avatar}.webp" alt="Logo"></div><div class="message">${botMessage}</div>`
+            el.innerHTML += `<div class="chatbox-time">${time}</div>`
+            el.classList.add('chatbox-fade')
+            stopFade()
+            chatboxBody.scrollTop = chatboxBody.scrollHeight
+            resetStats()
+            clearInterval(loader)
+        }
+        else if (i == 14 && !apiResolved) {
+            chatboxBodyInner.removeChild(el)
+            resetStats()
+            clearInterval(loader)
+        }
+        i = i + 2
+    }, 2000)
+}
+
+// Stop slide animation
+const stopSlide = () => {
+    let els = document.querySelectorAll('.chatbox-slide')
+    els.forEach((el) => {
+        el.addEventListener('animationend', () => {
+            el.classList.remove('chatbox-slide')
+            setTimeout(() => {
+                el.nextSibling.style.opacity = 1
+            }, 200)
+        })
+    })
+}
+
+// Stop Fade up animation
+const stopFade = () => {
+    let els = document.querySelectorAll('.chatbox-fade')
+    els.forEach((el) => {
+        el.addEventListener('animationend', () => {
+            el.classList.remove('chatbox-fade')
+        })
+    })
+}

@@ -57,7 +57,7 @@ const getQuote = () => {
     fetch('https://devapi.humalogy.ai/huma-chat/ask-query/', {
         method: 'POST',
         headers: {
-            'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo0NiwiZW1haWwiOiJ0aG9yQGFzZ2FyZC5jb20ifQ.TblgIGz92nM1nCLTLpQUxYh9iFyteNU1sd53z3vn7G0',
+            // 'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo0NiwiZW1haWwiOiJ0aG9yQGFzZ2FyZC5jb20ifQ.TblgIGz92nM1nCLTLpQUxYh9iFyteNU1sd53z3vn7G0',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
@@ -67,14 +67,12 @@ const getQuote = () => {
     }).then((res) => {
         return res.json()
     }).then((data) => {
-        console.log(data)
-        // console.log(index)
         // console.log(data)
         botMessage = data.data.message.replace('\n\nHumaChat:', '').trim()
         apiResolved = true
         clientMessage = ''
     }).catch((err) => {
-        console.log('Some error in getting message')
+        // console.log('Some error in getting message')
         apiResolved = false
         clientMessage = ''
     })
