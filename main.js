@@ -2,7 +2,7 @@
 // Data to be overwritten
 let chatbotName = 'Quill'
 let avatar = '3'
-
+let websiteUrl = "https://excellobpo.com/"
 // Static
 
 let chatbox = document.querySelector('.chatbox')
@@ -248,7 +248,7 @@ const getQuote = () => {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            "website_url": "https://excellobpo.com/",
+            "website_url": websiteUrl,
             "user_question": clientMessage
         })
     }).then((res) => {
